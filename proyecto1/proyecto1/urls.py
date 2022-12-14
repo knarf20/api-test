@@ -16,11 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from app1 import apis
+from rest_framework import routers
 
+router = routers.DefaultRouter()
+
+router.register('api/v1/todo', apis.TodoViewSetCustom, 'todosCustom')
+router.register('api/v2/todo', apis.TodoViewSet, 'todos')
+
+
+"""
+ como se comento en el apis.py no cuando creamos una ruta que esta siendo uso de 
+APIView no es necesario indicarle de forma explicita el metedo HTTP debido
+a que eso se mapea de forma automatica con los metodos que definamos dentro de la VIEW
+"""
 urlpatterns = [
     path("admin/", admin.site.urls),
-    """como se comento en el apis.py no cuando creamos una ruta que esta siendo uso de 
-    APIView no es necesario indicarle de forma explicita el metedo HTTP debido
-     a que eso se mapea de forma automatica con los metodos que definamos dentro de la VIEW"""
     path("todo/", apis.AllTodo.as_view()),
 ]
+
+urlpatterns += router.urls
