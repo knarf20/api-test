@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -61,10 +61,15 @@ class TodoViewSetCustom(viewsets.ModelViewSet):
             return self.get_paginated_response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        queryset = Todo.objects.all()
-        todo = get_object_or_404(queryset, pk=pk)
-        serializer = TodoSerializer(todo)
-        return Response(serializer.data)
+        #queryset = Todo.objects.all()
+        #todo = get_object_or_404(queryset, pk=pk)
+        #serializer = TodoSerializer(todo)
+        #return Response(serializer.data)
+        try:
+            obj = Todo.objects.get(pk=pk)
+        except Todo.DoesNotExist:
+            #raise Http404("sakldnkjsandjkanbdkjsa")
+            return HttpResponse('<h1>TEST</h1>')
 
     def create(self, request):
         serializer = TodoSerializer(data=request.data)

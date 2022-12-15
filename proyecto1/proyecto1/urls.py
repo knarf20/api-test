@@ -20,9 +20,11 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 
-router.register('api/v1/todo', apis.TodoViewSetCustom, 'todosCustom')
-router.register('api/v2/todo', apis.TodoViewSet, 'todos')
+#si queremos sobre escribir nuestras errors view por defecto mas info https://docs.djangoproject.com/en/dev/topics/http/views/#customizing-error-views
+#handler500 = 'app1.views.page_not_found_view'
 
+router.register('api/1/todo', apis.TodoViewSetCustom, 'todosCustom')
+router.register('api/2/todo', apis.TodoViewSet, 'todos')
 
 """
  como se comento en el apis.py no cuando creamos una ruta que esta siendo uso de 
@@ -31,7 +33,8 @@ a que eso se mapea de forma automatica con los metodos que definamos dentro de l
 """
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("todo/", apis.AllTodo.as_view()),
-]
+    path('users/', include('users.urls')),
+    path('', include('app1.urls')),
 
+]
 urlpatterns += router.urls
