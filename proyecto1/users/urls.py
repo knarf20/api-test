@@ -18,7 +18,7 @@ router = routers.DefaultRouter()
 router.register('', views.GetUsers)
 
 urlpatterns = [
-    path("signup/", views.SignUpView.as_view(), name="signup"),
+    path("signup/", views.SignUpView.as_view(), name="signup"), 
     path("login/", views.LoginView.as_view(), name="login"),
     path("jwt/create/", TokenObtainPairView.as_view(), name="jwt_create"),
     path("jwt/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
