@@ -32,7 +32,7 @@ APIView no es necesario indicarle de forma explicita el metedo HTTP debido
 a que eso se mapea de forma automatica con los metodos que definamos dentro de la VIEW
 """
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    #path("admin/", admin.site.urls),
     path('users/', include('users.urls')),
     path('', include('app1.urls')),
 
