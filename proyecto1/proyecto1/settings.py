@@ -135,7 +135,26 @@ REST_FRAMEWORK = {
     #aqui podemos agregar una clase personalizada para nuestra paginacion global
     #'DEFAULT_PAGINATION_CLASS': 'app1.pagination.StandardResultsSetPagination',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 100
+    'PAGE_SIZE': 100,
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
+        #debemos agregar esta clase para que nuestros scopes personalizados puedan funcionar.
+        'rest_framework.throttling.ScopedRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '100/day',
+        'user': '1000/day',
+        #estos nombres son libres, podemos llamarlos como queramos
+        'get': '1/day',
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
 }
 
 AUTH_USER_MODEL = "users.User"
+

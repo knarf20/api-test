@@ -23,8 +23,8 @@ router = routers.DefaultRouter()
 #si queremos sobre escribir nuestras errors view por defecto mas info https://docs.djangoproject.com/en/dev/topics/http/views/#customizing-error-views
 #handler500 = 'app1.views.page_not_found_view'
 
-router.register('api/1/todo', apis.TodoViewSetCustom, 'todosCustom')
-router.register('api/2/todo', apis.TodoViewSet, 'todos')
+#router.register('api/v1/todo', apis.TodoViewSetCustom, 'todosCustom')
+#router.register('api/v2/todo', apis.TodoViewSet, 'todos')
 
 """
  como se comento en el apis.py no cuando creamos una ruta que esta siendo uso de 
